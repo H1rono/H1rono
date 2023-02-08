@@ -19,3 +19,4 @@ jobs:
       - uses: lowlighter/metrics@latest
         with:
           token: ${{ secrets.METRICS_TOKEN }}
+          config_presets: https://raw.githubusercontent.com/H1rono/H1rono/main/metrics-preset.yml
