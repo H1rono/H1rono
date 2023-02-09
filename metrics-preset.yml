@@ -5,9 +5,6 @@ author: H1rono
 with:
   base: header, activity, community
   config_timezone: Asia/Tokyo
-  output_action: gist
-  committer_gist: ${{ secrets.GIST }}
-  filename: metrics.svg
   config_display: large
   config_order: base.header, base.activity, base.community, plugin_isocalendar, plugin_languages, plugin_habits
   # https://github.com/lowlighter/metrics/blob/master/source/plugins/isocalendar/README.md
