@@ -3,10 +3,10 @@ name: H1rono
 description: My metrics presets
 author: H1rono
 with:
-  base: header, activity, community
+  base: header
   config_timezone: Asia/Tokyo
   config_display: large
-  config_order: base.header, base.activity, base.community, isocalendar, languages, habits, achievements
+  config_order: base.header, isocalendar, languages, habits, achievements
   # https://github.com/lowlighter/metrics/blob/master/source/plugins/isocalendar/README.md
   plugin_isocalendar: yes
   plugin_isocalendar_duration: full-year
