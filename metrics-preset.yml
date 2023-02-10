@@ -6,7 +6,7 @@ with:
   base: header, activity, community
   config_timezone: Asia/Tokyo
   config_display: large
-  config_order: base.header, base.activity, base.community, isocalendar, languages, habits
+  config_order: base.header, base.activity, base.community, isocalendar, languages, habits, achievements
   # https://github.com/lowlighter/metrics/blob/master/source/plugins/isocalendar/README.md
   plugin_isocalendar: yes
   plugin_isocalendar_duration: full-year
@@ -16,3 +16,5 @@ with:
   # https://github.com/lowlighter/metrics/blob/master/source/plugins/habits/README.md
   plugin_habits: yes
   plugin_habits_days: 30
+  # https://github.com/lowlighter/metrics/blob/master/source/plugins/achievements/README.md
+  plugin_achievements: yes
