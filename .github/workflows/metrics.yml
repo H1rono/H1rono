@@ -27,5 +27,5 @@ jobs:
           token: ${{ secrets.METRICS_TOKEN }}
           output_action: gist
           committer_gist: ${{ secrets.GIST }}
-          filename: metrics.svg
+          filename: metrics-2.svg
           config_presets: https://raw.githubusercontent.com/H1rono/H1rono/main/metrics-presets/preset-2.yml
