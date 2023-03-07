@@ -1,5 +1,9 @@
 name: Metrics.png
 
+concurrency:
+  group: metrics-${{ github.ref }}
+  cancel-in-progress: true
+
 on:
   workflow_dispatch:
 
