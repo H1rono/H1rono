@@ -16,9 +16,8 @@ jobs:
         uses: lowlighter/metrics@latest
         with:
           token: ${{ secrets.METRICS_TOKEN }}
-          output_action: gist
-          committer_gist: ${{ secrets.GIST }}
-          config_output: "*"
+          output_action: none
+          config_output: png
           filename: metrics-1.png
           config_presets: https://raw.githubusercontent.com/H1rono/H1rono/main/metrics-presets/preset-1.yml
       - name: "metrics 2"
@@ -26,8 +25,21 @@ jobs:
         uses: lowlighter/metrics@latest
         with:
           token: ${{ secrets.METRICS_TOKEN }}
-          output_action: gist
-          committer_gist: ${{ secrets.GIST }}
-          config_output: "*"
+          output_action: none
+          config_output: png
           filename: metrics-2.png
           config_presets: https://raw.githubusercontent.com/H1rono/H1rono/main/metrics-presets/preset-2.yml
+      - name: "deploy 1"
+        if: ${{ success() }}
+        uses: exuanbo/actions-deploy-gist@v1
+        with:
+          token: ${{ secrets.METRICS_TOKEN }}
+          gist_id: ${{ secrets.GIST }}
+          file_path: /metrics_renders/metrics-1.png
+      - name: "deploy 2"
+        if: ${{ success() }}
+        uses: exuanbo/actions-deploy-gist@v1
+        with:
+          token: ${{ secrets.METRICS_TOKEN }}
+          gist_id: ${{ secrets.GIST }}
+          file_path: /metrics_renders/metrics-2.png
