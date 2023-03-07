@@ -29,17 +29,22 @@ jobs:
           config_output: png
           filename: metrics-2.png
           config_presets: https://raw.githubusercontent.com/H1rono/H1rono/main/metrics-presets/preset-2.yml
+      - name: "move outputs"
+        run: |
+          sudo mv /metrics_renders/*.png ./
       - name: "deploy 1"
         if: ${{ success() }}
         uses: exuanbo/actions-deploy-gist@v1
         with:
           token: ${{ secrets.METRICS_TOKEN }}
           gist_id: ${{ secrets.GIST }}
-          file_path: /metrics_renders/metrics-1.png
+          file_path: metrics-1.png
+          file_type: binary
       - name: "deploy 2"
         if: ${{ success() }}
         uses: exuanbo/actions-deploy-gist@v1
         with:
           token: ${{ secrets.METRICS_TOKEN }}
           gist_id: ${{ secrets.GIST }}
-          file_path: /metrics_renders/metrics-2.png
+          file_path: metrics-2.png
+          file_type: binary
