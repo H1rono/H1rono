@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  github-metrics:
+  github-metrics-png:
     runs-on: ubuntu-latest
     steps:
       - name: "metrics 1"
@@ -14,6 +14,7 @@ jobs:
           token: ${{ secrets.METRICS_TOKEN }}
           output_action: gist
           committer_gist: ${{ secrets.GIST }}
+          config_output: "*"
           filename: metrics-1.png
           config_presets: https://raw.githubusercontent.com/H1rono/H1rono/main/metrics-presets/preset-1.yml
       - name: "metrics 2"
@@ -23,5 +24,6 @@ jobs:
           token: ${{ secrets.METRICS_TOKEN }}
           output_action: gist
           committer_gist: ${{ secrets.GIST }}
+          config_output: "*"
           filename: metrics-2.png
           config_presets: https://raw.githubusercontent.com/H1rono/H1rono/main/metrics-presets/preset-2.yml
