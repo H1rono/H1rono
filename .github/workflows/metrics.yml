@@ -5,7 +5,8 @@ concurrency:
   cancel-in-progress: true
 
 on:
-  schedule: [{ cron: "0 0 * * *" }]
+  schedule:
+    - cron: "0 0 * * *"
   workflow_dispatch:
   push:
     branches:
@@ -15,18 +16,20 @@ jobs:
   github-metrics:
     runs-on: ubuntu-latest
     steps:
+
       - name: "metrics 1"
         if: ${{ success() || failure() }}
-        uses: lowlighter/metrics@latest
+        uses: lowlighter/metrics@v3.34
         with:
           token: ${{ secrets.METRICS_TOKEN }}
           output_action: gist
           committer_gist: ${{ secrets.GIST }}
           filename: metrics-1.svg
           config_presets: https://raw.githubusercontent.com/H1rono/H1rono/main/metrics-presets/preset-1.yml
+
       - name: "metrics 2"
         if: ${{ success() || failure() }}
-        uses: lowlighter/metrics@latest
+        uses: lowlighter/metrics@v3.34
         with:
           token: ${{ secrets.METRICS_TOKEN }}
           output_action: gist
