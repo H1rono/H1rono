@@ -10,46 +10,45 @@ on:
 jobs:
   github-metrics-png:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
-
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: "metrics 1"
         if: ${{ success() || failure() }}
         uses: lowlighter/metrics@v3.34
         with:
-          token: ${{ secrets.METRICS_TOKEN }}
+          token: ${{ github.token }}
           output_action: none
           config_output: png
           filename: metrics-1.png
           config_presets: https://raw.githubusercontent.com/H1rono/H1rono/main/metrics-presets/preset-1.yml
-
       - name: "metrics 2"
         if: ${{ success() || failure() }}
         uses: lowlighter/metrics@v3.34
         with:
-          token: ${{ secrets.METRICS_TOKEN }}
+          token: ${{ github.token }}
           output_action: none
           config_output: png
           filename: metrics-2.png
           config_presets: https://raw.githubusercontent.com/H1rono/H1rono/main/metrics-presets/preset-2.yml
-
-      - name: "move outputs"
+      - name: "collect metrics images"
         run: |
-          sudo mv /metrics_renders/*.png ./
-
-      - name: "deploy 1"
-        if: ${{ success() }}
-        uses: exuanbo/actions-deploy-gist@v1
-        with:
-          token: ${{ secrets.METRICS_TOKEN }}
-          gist_id: ${{ secrets.GIST }}
-          file_path: metrics-1.png
-          file_type: binary
-
-      - name: "deploy 2"
-        if: ${{ success() }}
-        uses: exuanbo/actions-deploy-gist@v1
-        with:
-          token: ${{ secrets.METRICS_TOKEN }}
-          gist_id: ${{ secrets.GIST }}
-          file_path: metrics-2.png
-          file_type: binary
+          mkdir tmp
+          sudo cp /metrics_renders/metrics-1.png ./tmp/
+          sudo cp /metrics_renders/metrics-2.png ./tmp/
+          sudo chown -R "$USER:$USER" tmp
+          sudo chmod 644 tmp/*.png
+          mv tmp/metrics-1.png assets/
+          mv tmp/metrics-2.png assets/
+      - name: "commit metrics updates"
+        run: |
+          git config user.name 'GitHub Action'
+          git config user.email 'action@github.com'
+          git add assets
+          git diff --quiet assets || {
+            git commit -m 'Update metrics.png [skip ci]'
+            git push
+          }
