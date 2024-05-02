@@ -15,24 +15,41 @@ on:
 jobs:
   github-metrics:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
-
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: "metrics 1"
         if: ${{ success() || failure() }}
         uses: lowlighter/metrics@v3.34
         with:
           token: ${{ secrets.METRICS_TOKEN }}
-          output_action: gist
-          committer_gist: ${{ secrets.GIST }}
+          output_action: none
           filename: metrics-1.svg
           config_presets: https://raw.githubusercontent.com/H1rono/H1rono/main/metrics-presets/preset-1.yml
-
       - name: "metrics 2"
         if: ${{ success() || failure() }}
         uses: lowlighter/metrics@v3.34
         with:
           token: ${{ secrets.METRICS_TOKEN }}
-          output_action: gist
-          committer_gist: ${{ secrets.GIST }}
+          output_action: none
           filename: metrics-2.svg
           config_presets: https://raw.githubusercontent.com/H1rono/H1rono/main/metrics-presets/preset-2.yml
+      - name: "collect metrics images"
+        run: |
+          mkdir tmp
+          sudo cp /metrics_renders/metrics-1.svg ./tmp/
+          sudo cp /metrics_renders/metrics-2.svg ./tmp/
+          sudo chown -R "$USER:$USER" tmp
+          sudo chmod 644 tmp/*.svg
+          mv tmp/metrics-1.svg assets/
+          mv tmp/metrics-2.svg assets/
+      - name: "commit metrics updates"
+        run: |
+          git config user.name 'GitHub Action'
+          git config user.email 'action@github.com'
+          git add assets
+          git commit -m 'Update metrics [skip ci]'
+          git push
