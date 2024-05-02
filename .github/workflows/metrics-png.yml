@@ -45,11 +45,4 @@ jobs:
           mv tmp/metrics-1.png assets/
           mv tmp/metrics-2.png assets/
       - name: "commit metrics updates"
-        run: |
-          git config user.name 'GitHub Action'
-          git config user.email 'action@github.com'
-          git add assets
-          git diff --quiet assets || {
-            git commit -m 'Update metrics.png [skip ci]'
-            git push
-          }
+        run: bash .github/scripts/push-assets.bash
