@@ -21,7 +21,7 @@ jobs:
         if: ${{ success() || failure() }}
         uses: lowlighter/metrics@v3.34
         with:
-          token: ${{ github.token }}
+          token: ${{ secrets.METRICS_TOKEN }}
           output_action: none
           config_output: png
           filename: metrics-1.png
@@ -30,7 +30,7 @@ jobs:
         if: ${{ success() || failure() }}
         uses: lowlighter/metrics@v3.34
         with:
-          token: ${{ github.token }}
+          token: ${{ secrets.METRICS_TOKEN }}
           output_action: none
           config_output: png
           filename: metrics-2.png

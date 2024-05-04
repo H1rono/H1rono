@@ -25,7 +25,7 @@ jobs:
         if: ${{ success() || failure() }}
         uses: lowlighter/metrics@v3.34
         with:
-          token: ${{ github.token }}
+          token: ${{ secrets.METRICS_TOKEN }}
           output_action: none
           filename: metrics-1.svg
           config_presets: https://raw.githubusercontent.com/H1rono/H1rono/main/metrics-presets/preset-1.yml
@@ -33,7 +33,7 @@ jobs:
         if: ${{ success() || failure() }}
         uses: lowlighter/metrics@v3.34
         with:
-          token: ${{ github.token }}
+          token: ${{ secrets.METRICS_TOKEN }}
           output_action: none
           filename: metrics-2.svg
           config_presets: https://raw.githubusercontent.com/H1rono/H1rono/main/metrics-presets/preset-2.yml
