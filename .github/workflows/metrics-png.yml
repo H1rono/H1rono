@@ -19,7 +19,7 @@ jobs:
           ref: refs/heads/main
       - name: "metrics 1"
         if: ${{ success() || failure() }}
-        uses: lowlighter/metrics@v4
+        uses: lowlighter/metrics@v3.34
         with:
           token: ${{ secrets.METRICS_TOKEN }}
           output_action: none
@@ -28,7 +28,7 @@ jobs:
           config_presets: https://raw.githubusercontent.com/H1rono/H1rono/main/metrics-presets/preset-1.yml
       - name: "metrics 2"
         if: ${{ success() || failure() }}
-        uses: lowlighter/metrics@v4
+        uses: lowlighter/metrics@v3.34
         with:
           token: ${{ secrets.METRICS_TOKEN }}
           output_action: none
