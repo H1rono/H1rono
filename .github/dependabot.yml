@@ -11,3 +11,5 @@ updates:
       interval: "monthly"
     reviewers:
       - "H1rono"
+    ignore:
+      - dependency-name: lowlighter/metrics
